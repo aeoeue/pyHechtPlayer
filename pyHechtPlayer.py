@@ -16,7 +16,15 @@ PICKLE_FILE = "app_state.pkl"
 def load_previous_state():
     if os.path.exists(PICKLE_FILE):
         with open(PICKLE_FILE, 'rb') as f:
-            return pickle.load(f)
+            state = pickle.load(f)
+            # Provide default values if keys are missing
+            return {
+                'file_path': state.get('file_path', ''),
+                'start_jingle': state.get('start_jingle', ''),
+                'last_jingle': state.get('last_jingle', ''),
+                'last_seconds': state.get('last_seconds', 200)
+            }
+    # Default state if the pickle file does not exist
     return {'file_path': '', 'start_jingle': '', 'last_jingle': '', 'last_seconds': 200}
 
 # Function to save file path, start jingle, last jingle, and last_seconds on app close
