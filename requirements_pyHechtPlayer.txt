@@ -1,0 +1,5 @@
+pyautogui
+schedule
+playsound
+dbus-python
+tk
